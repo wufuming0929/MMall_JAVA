@@ -1,5 +1,6 @@
 package com.mmall.controller.portal;
 
+
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.demo.trade.config.Configs;
@@ -24,6 +25,7 @@ import java.util.Map;
 /**
  * Created by weimin on 17-7-17.
  */
+
 @RestController
 @RequestMapping("/order/")
 public class OrderController {
@@ -147,3 +149,4 @@ public class OrderController {
     }
 
 }
+

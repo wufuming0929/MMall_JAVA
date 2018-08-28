@@ -26,7 +26,7 @@ public class OrderManageController {
 
     @Autowired
     private IUserService iUserService;
-    @Autowired
+    @Autowired(required = false)
     private IOrderService iOrderService;
 
     @RequestMapping("list.do")

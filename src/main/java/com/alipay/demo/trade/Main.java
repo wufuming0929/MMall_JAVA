@@ -24,11 +24,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by liuyangkly on 15/8/9.
@@ -39,10 +35,10 @@ public class Main {
     private static Log log = LogFactory.getLog(Main.class);
 
     // 支付宝当面付2.0服务
-    private static AlipayTradeService   tradeService;
+    private static AlipayTradeService tradeService;
 
     // 支付宝当面付2.0服务（集成了交易保障接口逻辑）
-    private static AlipayTradeService   tradeWithHBService;
+    private static AlipayTradeService tradeWithHBService;
 
     // 支付宝交易保障接口服务，供测试接口api使用，请先阅读readme.txt
     private static AlipayMonitorService monitorService;
@@ -66,6 +62,32 @@ public class Main {
             .setGatewayUrl("http://mcloudmonitor.com/gateway.do").setCharset("GBK")
             .setFormat("json").build();
     }
+
+    /**
+     * out_trade_no : tradeprecreate15346941399277625789
+     * seller_id :
+     * total_amount : 0.01
+     * undiscountable_amount : 0
+     * subject : xxx品牌xxx门店当面付扫码消费
+     * body : 购买商品3件共20.00元
+     * goods_detail : [{"goods_id":"goods_id001","goods_name":"xxx小面包","quantity":1,"price":"10"},{"goods_id":"goods_id002","goods_name":"xxx牙刷","quantity":2,"price":"5"}]
+     * operator_id : test_operator_id
+     * store_id : test_store_id
+     * extend_params : {"sys_service_provider_id":"2088100200300400500"}
+     * timeout_express : 120m
+     */
+
+    private String out_trade_no;
+    private String seller_id;
+    private String total_amount;
+    private String undiscountable_amount;
+    private String subject;
+    private String body;
+    private String operator_id;
+    private String store_id;
+    private ExtendParamsBean extend_params;
+    private String timeout_express;
+    private List<GoodsDetailBean> goods_detail;
 
     // 简单打印应答
     private void dumpResponse(AlipayResponse response) {
@@ -190,7 +212,7 @@ public class Main {
             .setNetworkType("3G").setBattery("98").setWifiMac("0a:00:27:00:00:00")
             .setWifiName("test_wifi_name").setIp("192.168.1.188")
             .setPosTradeInfoList(posTradeInfoList) // POS厂商同步trade_info信息
-            //                .setExceptionInfoList(exceptionInfoList) // 填写异常信息，如果有的话
+            //               .setExceptionInfoList(exceptionInfoList) // 填写异常信息，如果有的话
             .setExtendInfo(extendInfo) // 填写扩展信息，如果有的话
         ;
 
@@ -423,7 +445,7 @@ public class Main {
             .setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
             .setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
             .setTimeoutExpress(timeoutExpress)
-            //                .setNotifyUrl("http://www.test-notify-url.com")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
+                            .setNotifyUrl("http://vay2k4.natappfree.cc/order/alipay_callback.do")//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
             .setGoodsDetailList(goodsDetailList);
 
         AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);
@@ -452,6 +474,156 @@ public class Main {
             default:
                 log.error("不支持的交易状态，交易返回异常!!!");
                 break;
+        }
+    }
+
+    public String getOut_trade_no() {
+        return out_trade_no;
+    }
+
+    public void setOut_trade_no(String out_trade_no) {
+        this.out_trade_no = out_trade_no;
+    }
+
+    public String getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(String seller_id) {
+        this.seller_id = seller_id;
+    }
+
+    public String getTotal_amount() {
+        return total_amount;
+    }
+
+    public void setTotal_amount(String total_amount) {
+        this.total_amount = total_amount;
+    }
+
+    public String getUndiscountable_amount() {
+        return undiscountable_amount;
+    }
+
+    public void setUndiscountable_amount(String undiscountable_amount) {
+        this.undiscountable_amount = undiscountable_amount;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getOperator_id() {
+        return operator_id;
+    }
+
+    public void setOperator_id(String operator_id) {
+        this.operator_id = operator_id;
+    }
+
+    public String getStore_id() {
+        return store_id;
+    }
+
+    public void setStore_id(String store_id) {
+        this.store_id = store_id;
+    }
+
+    public ExtendParamsBean getExtend_params() {
+        return extend_params;
+    }
+
+    public void setExtend_params(ExtendParamsBean extend_params) {
+        this.extend_params = extend_params;
+    }
+
+    public String getTimeout_express() {
+        return timeout_express;
+    }
+
+    public void setTimeout_express(String timeout_express) {
+        this.timeout_express = timeout_express;
+    }
+
+    public List<GoodsDetailBean> getGoods_detail() {
+        return goods_detail;
+    }
+
+    public void setGoods_detail(List<GoodsDetailBean> goods_detail) {
+        this.goods_detail = goods_detail;
+    }
+
+    public static class ExtendParamsBean {
+        /**
+         * sys_service_provider_id : 2088100200300400500
+         */
+
+        private String sys_service_provider_id;
+
+        public String getSys_service_provider_id() {
+            return sys_service_provider_id;
+        }
+
+        public void setSys_service_provider_id(String sys_service_provider_id) {
+            this.sys_service_provider_id = sys_service_provider_id;
+        }
+    }
+
+    public static class GoodsDetailBean {
+        /**
+         * goods_id : goods_id001
+         * goods_name : xxx小面包
+         * quantity : 1
+         * price : 10
+         */
+
+        private String goods_id;
+        private String goods_name;
+        private int quantity;
+        private String price;
+
+        public String getGoods_id() {
+            return goods_id;
+        }
+
+        public void setGoods_id(String goods_id) {
+            this.goods_id = goods_id;
+        }
+
+        public String getGoods_name() {
+            return goods_name;
+        }
+
+        public void setGoods_name(String goods_name) {
+            this.goods_name = goods_name;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
         }
     }
 }

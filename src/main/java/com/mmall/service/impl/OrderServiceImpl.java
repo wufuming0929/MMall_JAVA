@@ -1,5 +1,6 @@
 package com.mmall.service.impl;
 
+
 import com.alipay.api.AlipayResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.demo.trade.config.Configs;
@@ -42,6 +43,7 @@ import java.util.*;
 /**
  * Created by weimin on 17-7-17.
  */
+
 @Service("iOrderService")
 public class OrderServiceImpl implements IOrderService {
     private static AlipayTradeService tradeService;
@@ -356,7 +358,7 @@ public class OrderServiceImpl implements IOrderService {
         String timeoutExpress = "120m";
 
         // 商品明细列表，需填写购买商品详细信息，
-        List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
+        List<GoodsDetail> goodsDetailList = new ArrayList<>();
         List<OrderItem> orderItemList = orderItemMapper.getByOrderNoUserId(orderNo, userId);
         for (OrderItem orderItem : orderItemList) {
             GoodsDetail goods = GoodsDetail.newInstance(orderItem.getProductId().toString(), orderItem.getProductName(),
