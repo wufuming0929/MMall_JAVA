@@ -1,9 +1,9 @@
-echo "===========进入git项目happymmall目录============="
-cd /developer/git-repository/MMall_JAVA
+echo "===========进入git项目mmall目录============="
+cd /developer/git-repository/mmall
 
 
-echo "==========切换到release(发布分支）==============="
-git checkout release
+echo "==========切换到v1.0(发布分支）==============="
+git checkout v1.0
 
 echo "==================git fetch======================"
 git fetch
@@ -17,20 +17,20 @@ mvn clean package -Dmaven.test.skip=true
 
 
 echo "============删除旧的ROOT.war==================="
-rm /developer/apache-tomcat-7.0.73/webapps/ROOT.war
+rm /developer/tomcat-7.0.73/webapps/ROOT.war
 
 
 echo "======拷贝编译出来的war包到tomcat下-ROOT.war======="
-cp /developer/git-repository/MMall_JAVA/target/mmall.war  /developer/apache-tomcat-7.0.73/webapps/ROOT.war
+cp /developer/git-repository/mmall/target/mmall.war  /developer/tomcat-7.0.73/webapps/ROOT.war
 
 
 echo "============删除tomcat下旧的ROOT文件夹============="
-rm -rf /developer/apache-tomcat-7.0.73/webapps/ROOT
+rm -rf /developer/tomcat-7.0.73/webapps/ROOT
 
 
 
 echo "====================关闭tomcat====================="
-/developer/apache-tomcat-7.0.73/bin/shutdown.sh
+/developer/tomcat-7.0.73/bin/shutdown.sh
 
 
 echo "================sleep 10s========================="
@@ -42,7 +42,7 @@ done
 
 
 echo "====================启动tomcat====================="
-/developer/apache-tomcat-7.0.73/bin/startup.sh
+/developer/tomcat-7.0.73/bin/startup.sh
 
 
 
