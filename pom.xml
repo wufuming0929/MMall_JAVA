@@ -68,6 +68,7 @@
             <artifactId>mybatis-spring</artifactId>
             <version>${org.mybatis.spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
@@ -100,6 +101,7 @@
             <version>1.1.2</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
@@ -119,13 +121,11 @@
             <version>20.0</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.5</version>
         </dependency>
-
 
         <dependency>
             <groupId>commons-collections</groupId>
@@ -293,7 +293,6 @@
                 <directory>src/main/resources</directory>
             </resource>
         </resources>
-
     </build>
     <!--maven分环境隔离-->
     <profiles>

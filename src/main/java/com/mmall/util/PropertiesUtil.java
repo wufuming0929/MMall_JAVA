@@ -47,6 +47,24 @@ public class PropertiesUtil {
         return value.trim();
     }
 
+    public static int getInt(String key,int defaultValue){
+        String value = getProperty(key);
+        if (StringUtils.isNotEmpty(value)) {
+            //尝试将数字字符串转化为数字
+            try {
+                return Integer.parseInt(value);
+            }catch (NumberFormatException e){/**/}
+        }
+        return defaultValue;
+    }
+
+    public static boolean getBoolean(String key){
+        String value = getProperty(key);
+        return Boolean.parseBoolean(value);
+    }
+
+
+
     public static void main(String[] arges) throws Exception{
        //FTP上传步骤演示
         String ip = "192.168.163.130";//ftp的ip
