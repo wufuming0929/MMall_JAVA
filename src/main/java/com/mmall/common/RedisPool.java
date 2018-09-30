@@ -21,8 +21,8 @@ public class RedisPool {
     private static Integer minIdle = PropertiesUtil.getInt("redis.min.idle",2);//最小空闲数
     private static Boolean testOnBorrow =PropertiesUtil.getBoolean("redis.test.borrow");//获取连接到时候，检查连接是否可用
     private static Boolean testOnReturn = PropertiesUtil.getBoolean("redis.test.return");//返回连接时，检查连接是否可用
-    private static  String redisIp = PropertiesUtil.getProperty("redis.ip");//ip
-    private static  Integer redisPort = Integer.parseInt(PropertiesUtil.getProperty("redis.port"));//端口
+    private static  String redisIp = PropertiesUtil.getProperty("redis1.ip");//ip
+    private static  Integer redisPort = Integer.parseInt(PropertiesUtil.getProperty("redis1.port"));//端口
 
     private static void initPool(){
 
